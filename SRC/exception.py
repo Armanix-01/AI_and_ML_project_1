@@ -1,9 +1,7 @@
 import sys ##The sys modeule provide various fnctiions and 
 # variables that is used in manipulating various parts of 
 #python runtime environment
-
-import logger
-
+from SRC import logger
 """Why logger.logging works but logging does not
  When you write: import logger
  Inside logger.py you have this: 
