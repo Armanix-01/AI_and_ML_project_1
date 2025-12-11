@@ -15,6 +15,7 @@ def get_req(file_path:str)->List[str]:
         # triggers the setup.py, its not a module.
         if HYPHEN_DOT_E in requirements:
             requirements.remove(HYPHEN_DOT_E)
+    return requirements
 
 setup(
     name="AI_and_ML_project_1",
