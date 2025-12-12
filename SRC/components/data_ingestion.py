@@ -24,6 +24,7 @@ np.set_printoptions(threshold=sys.maxsize)
 x_train=ct.fit_transform(x_train)'''
 from SRC.exception import CustomException
 from SRC.logger import logging
+from SRC.components.data_transformation import DataTransformation,DataTransformationConfig
 import pandas as pd
 from dataclasses import dataclass
 from sklearn.model_selection import train_test_split
@@ -113,4 +114,6 @@ class DataIngestion:
 
 if __name__ == "__main__":
     obj = DataIngestion()
-    obj.initiate_data_ingestion()
+    train_data, test_data =obj.initiate_data_ingestion()
+    data_transformation = DataTransformation()
+    data_transformation.initiate_data_transformation(train_data, test_data)
