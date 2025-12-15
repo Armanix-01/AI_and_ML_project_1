@@ -18,6 +18,7 @@ from SRC.logger import logging
 import dill
 from sklearn.metrics import r2_score
 from sklearn.model_selection import GridSearchCV
+import pickle
 
 ## to make code more cleaner we could have made
 def save_object(file_path:str,
@@ -130,12 +131,65 @@ A dictionary is unpacked into named arguments
 Keys → parameter names
 Values → parameter values """
     
+def load_obj(file_path):
+    with open(file_path, 'rb') as obj:
+        return pickle.load(obj)
 
 
+##Serialization
+'''Serialization in Python is the process of converting complex
+data structures or objects into a format that can be easily 
+stored, transmitted over a network, and later reconstructed.
+This process is also known as pickling when using Python's 
+built-in pickle module. 
+The reverse process of converting the serialized format back
+into a usable Python object is called deserialization 
+(or unpickling). '''
 
 
-
-
-
+## Uses of Serialization
+'''Serialization is used in various scenarios:
+1. Data Persistence: Saving the state of an object or application 
+to a file for later use (e.g., saving game progress or user
+ preferences).
+2. Data Transmission: Sending data between different systems 
+or processes over a network (e.g., web APIs use JSON for data
+ interchange).
+3. Caching: Storing complex, time-consuming computed data in a 
+fast-access format to improve performance.
+'''
  
+##Pickle load and dump
+'''The terms load and dump are fundamental function names used i
+n Python's standard libraries, most notably json and pickle, 
+to manage the process of serialization and deserialization.
 
+dump is used to write (serialize) Python objects to a file.
+load is used to read (deserialize) data from a file into a Python
+object.
+In simpler terms, you dump data into a storage medium (like a 
+file), and you load data out of that storage medium back into
+memory.'''
+
+##Dill
+'''In Python, dill is a third-party library that acts as an 
+extension of the built-in pickle module, providing more robust
+serialization capabilities. It is designed to serialize a wider
+range of Python objects that pickle cannot handle by default. 
+
+Why use dill?
+The standard pickle module can serialize most basic Python 
+objects (like lists, dictionaries, integers, and custom class 
+instances), but it often fails on more complex or "exotic" types,
+such as: 
+1. Functions defined in an interactive session (like a Jupyter
+ notebook)
+2. lambda functions
+3. Nested functions and closures
+4. Entire modules or interpreter sessions
+5. File handles and their contents 
+
+dill addresses these limitations by serializing the object's 
+code and dependencies, not just its state, making it a powerful
+tool for scenarios like distributed computing, where complex   
+functions need to be sent across different processes. '''

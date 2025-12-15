@@ -1,0 +1,189 @@
+<html>
+<body>
+    <div class="login">
+       <h1>Student Exam Performance Indicator</h1>
+   
+       <form action="{{ url_for('predict_datapoint')}}" method="post">
+        <h1>
+            <legend>Student Exam Performance Prediction</legend>
+        </h1>
+        <div class="mb-5">
+            <label class="form-label">Gender</label>
+            <select class="form-control" name="gender" placeholder="Enter you Gender" required>
+                <option class="placeholder" selected disabled value="">Select your Gender</option>
+                <option value="male">
+                    Male
+                </option>
+                <option value="female">
+                    Female
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Race or Ethnicity</label>
+            <select class="form-control" name="ethnicity" placeholder="Enter ethnicity" required>
+                <option class="placeholder" selected disabled value="">Select Ethnicity</option>
+                <option value="group A">
+                    Group A
+                </option>
+                <option value="group B">
+                    Group B
+                </option>
+                <option value="group C">
+                    Group C
+                </option>
+                <option value="group D">
+                    Group D
+                </option>
+                <option value="group E">
+                    Group E
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Parental Level of Education</label>
+            <select class="form-control" name="parental_level_of_education"
+                placeholder="Enter you Parent Education" required>
+                <option class="placeholder" selected disabled value="">Select Parent Education</option>
+                <option value="associate's degree">
+                    associate's degree
+                </option>
+                <option value="bachelor's degree">
+                    bachelor's degree
+                </option>
+                <option value="high school">
+                    high school
+                </option>
+                <option value="master's degree">
+                    master's degree
+                </option>
+                <option value="some college">
+                    some college
+                </option>
+                <option value="some high school">
+                    some high school
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Lunch Type</label>
+            <select class="form-control" name="lunch" placeholder="Enter you Lunch" required>
+                <option class="placeholder" selected disabled value="">Select Lunch Type</option>
+                <option value="free/reduced">
+                    free/reduced
+                </option>
+                <option value="standard">
+                    standard
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Test preparation Course</label>
+            <select class="form-control" name="test_preparation_course" placeholder="Enter you Course"
+                required>
+                <option class="placeholder" selected disabled value="">Select Test_course</option>
+                <option value="none">
+                    None
+                </option>
+                <option value="completed">
+                    Completed
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Writing Score out of 100</label>
+            <input class="form-control" type="number" name="reading_score"
+                placeholder="Enter your Reading score" min='0' max='100' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Reading Score out of 100</label>
+            <input class="form-control" type="number" name="writing_score"
+                placeholder="Enter your Reading Score" min='0' max='100' />
+        </div>
+        <div class="mb-3">
+            <input class="btn btn-primary" type="submit" value="Predict your Maths Score" required />
+        </div>
+    </form>
+    <h2>
+       THE  prediction is {{results}}
+    </h2>
+   <body>
+</html>
+
+<!--
+
+1. class login: here class is the html attribute which is used to assign
+ CSS classes to the element.
+
+2. <form action="{{ url_for('predict_datapoint')}}" method="post">
+here form basically collects the user input and send it to the backend.
+url_for is basically a flask function used for dynamically building URLs 
+for specific functions (endpoints) defined in your application. Instead 
+of hard-coding URLs in your templates or Python code, you use url_for() 
+to generate them based on the function's name. “Send this form data to 
+the Flask function predict_datapoint()” 
+
+3. div class = "mb-3": mb-3 is a bootstrap utility class and it comes 
+from the bootsrap css framemwork.
+- Here m stands for margin, which is the space outside the element(here 
+the element is div)
+- b stands for bottom so this margin is applied to the element(div) below
+ the element 
+- 3 means the scale value and it controls how much space is given when 
+applying margin at the bottom and here its 3 and 3 = 1rem
+- there is also padding when use pb-3 then that means space increase 
+inside the div, pushes content inward
+
+4.<label class="form-label">Race or Ethnicity</label>:
+- lable describes what input field is for
+- class="form-label" is a bootstrap class that baiscally styles label
+
+5.<select class="form-control" name="ethnicity" placeholder="Enter you 
+ethnicity" required>
+- select creates a dropdown list.
+- class="form-control" is a bootstrap class which makes drop down 
+responsive and stylish.
+- name = "ethnicity" is the most important attribute here, basically a 
+dictionary is sent to backend when we do requiest.form("ethnicity") and 
+this name is the key to the values that we choose in rolldown
+- placeholder = "Enter your ethinicity"  here placeholder will not do 
+anything,placeholder is used to display temportary text in input.
+Placeholder is only valid for <imput> or <textarea>
+- required = this makes user cant submit without selecting value.
+
+6. <option class="placeholder" selected disabled value="">Select Ethnicity</option>
+- option= option represents one selectable value
+- class="placeholder" here class is a global html attribute which is 
+used to atach CSS styles or javascript behavior. Placeholder is just a 
+custom name chosen by developer no real built -in meaning, we use 
+option.placeholder { 
+  color: #999;
+} for making cutom css class this makes Select Ethinicity greys out
+
+- selected mean this option should be selected when the page loads, here that option is Select Ethnicity.
+- disabled mean that this option is just for display, User is not allowed to select it.
+- value="" What value is send to the backend here this means that nothing should be sent to backend. This prevents accidental submission
+
+
+7. <option value="group A">Group A</option>
+- here option= represents one selectable option
+- value = "group A" means that the value which is sent when user press submit is "gruop A"
+
+                     NUMERIC
+
+8. <input class="form-control" type="number" name="reading_score"
+       placeholder="Enter your Reading score" min='0' max='100' />
+- input= single line user input field
+- type='number'= only numbers allowed
+- name="reading_score"= backend key(meaning when u do request.form["reading_score"] you will get value, cause dictionary is sent to backend when u do request.form and key = 'name')
+- placeholder= "Enter your reading score"= This text is written on the box where we need to write the text
+- min = '0' max = '100' = This is the range
+
+
+9. <input class="btn btn-primary" type="submit"
+       value="Predict your Maths Score" required />
+
+- btn btn-primary = Bootstrap button styling
+- type="submit": Sends the data to backend
+- value="" : This is the button text shown to user
+-->
