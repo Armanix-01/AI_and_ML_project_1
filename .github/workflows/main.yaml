@@ -77,6 +77,13 @@ jobs:
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
 
+
+      - name: Debug image reference
+        run: |
+          echo "ECR URI = '${{ secrets.AWS_ECR_LOGIN_URI }}'"
+          echo "ECR REPO = '${{ secrets.ECR_REPOSITORY_NAME }}'"
+
+
       - name: Pull latest image
         run: |
           docker pull ${{ secrets.AWS_ECR_LOGIN_URI }}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
